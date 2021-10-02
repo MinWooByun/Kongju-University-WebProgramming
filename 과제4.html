@@ -10,53 +10,10 @@
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-        padding: 0px 600px;
-        background-color: rgba(0, 0, 0, 0.8);
       }
       a {
         text-decoration: none;
-        color: white;
-        font-weight: 600;
-        font-size: 16px;
-      }
-      header h1 {
-        text-align: center;
-        color: white;
-      }
-      .portfolio {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .menu {
-        margin: 20px 0px;
-      }
-      .menu button {
-        padding: 15px 30px;
-        font-size: 15px;
-        font-weight: 600;
-        background-color: #e50914;
-        border: none;
-        border-radius: 5px;
-        margin: 0px 30px;
-      }
-      .menu hr {
-        margin: 20px 0px;
-      }
-      .link {
-        color: white;
-      }
-      .link h3 {
-        font-size: 25px;
-      }
-      .link p {
-        font-size: 25px;
-      }
-      .link a {
-        font-size: 25px;
-      }
-      iframe {
-        border-radius: 5px;
+        color: black;
       }
     </style>
   </head>
@@ -66,48 +23,40 @@
       <hr />
     </header>
     <main>
-      <section class="portfolio">
-        <section class="menu">
-          <button type="button">
-            <a href="인적사항.html" target="content">인적사항</a>
-          </button>
-          <button type="button">
-            <a href="언어.html" target="content">현재 다룰 줄 아는 언어</a>
-          </button>
-          <button type="button">
-            <a href="자격증.html" target="content">자격증 현황</a>
-          </button>
-          <hr />
-        </section>
+      <section>
+        <button type="button">
+          <a href="인적사항.html" target="content">인적사항</a>
+        </button>
+        <button type="button">
+          <a href="언어.html" target="content">현재 다룰 줄 아는 언어</a>
+        </button>
+        <button type="button">
+          <a href="자격증.html" target="content">자격증 현황</a>
+        </button>
+        <hr />
+      </section>
 
-        <section>
-          <iframe name="content" width="600px" height="400px"></iframe>
-        </section>
+      <section>
+        <iframe
+          name="content"
+          width="600px"
+          height="400px"
+          srcdoc="위의 버튼을 누르면 콘텐츠가 표시됩니다."
+        ></iframe>
+      </section>
 
-        <section class="link">
-          <h3>관련링크</h3>
-          <ul>
-            <li>
-              <p>자기소개서</p>
-              <iframe
-                src="자기소개서.html"
-                width="500px"
-                height="500px"
-              ></iframe>
-            </li>
-            <li>
-              <a href="https://github.com/Byun0904" target="blank"
-                ><i class="fab fa-github"></i>GitHub</a
-              >
-            </li>
-          </ul>
-        </section>
+      <section>
+        <h3>관련링크</h3>
+        <ul>
+          <li>
+            <p>자기소개서</p>
+            <iframe src="자기소개서.html" width="500px" height="500px"></iframe>
+          </li>
+          <li>
+            <a href="https://github.com/Byun0904" target="blank">GitHub</a>
+          </li>
+        </ul>
       </section>
     </main>
   </body>
-
-  <script
-    src="https://kit.fontawesome.com/ab4479fe86.js"
-    crossorigin="anonymous"
-  ></script>
 </html>
