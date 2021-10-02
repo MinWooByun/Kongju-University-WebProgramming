@@ -14,8 +14,8 @@
       }
       header h1 {
         text-align: center;
-        margin-top: 100px;
         color: white;
+        margin: -5px 0px;
       }
       .login {
         display: flex;
@@ -23,14 +23,13 @@
       }
       .login-content {
         width: 450px;
-        height: 330px;
+        height: 750px;
         background-color: rgba(0, 0, 0, 0.9);
         padding: 65px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         border-radius: 5px;
-        margin-top: 100px;
       }
       .login-content h1 {
         color: white;
@@ -74,17 +73,36 @@
     <main>
       <section class="login">
         <section class="login-content">
-          <h1>회원가입</h1>
           <form action="과제5.html" method="GET" class="login-form">
+            <h1>이메일</h1>
             <input
               class="login-form__idpw"
               type="text"
               placeholder="이메일을 입력해주세요."
             />
+            <h1>비밀번호</h1>
             <input
               class="login-form__idpw"
               type="password"
               placeholder="비밀번호를 입력해주세요."
+            />
+            <h1>비밀번호 재확인</h1>
+            <input
+              class="login-form__idpw"
+              type="password"
+              placeholder="비밀번호를 입력해주세요."
+            />
+            <h1>이름</h1>
+            <input
+              class="login-form__idpw"
+              type="text"
+              placeholder="이름을 입력해주세요."
+            />
+            <h1>전화번호</h1>
+            <input
+              class="login-form__idpw"
+              type="text"
+              placeholder="전화번호를 입력해주세요."
             />
             <input class="login-form__submit" type="submit" value="회원가입" />
           </form>
