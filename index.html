@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>간단한 계산기 제작</title>
+    <script>
+      function gugudan(n) {
+        let m = parseInt(n);
+        if (isNaN(m) || m < 0 || m > 9) {
+          alert("잘못입력했습니다.");
+          return;
+        } else {
+          for (let i = 1; i < 10; i++) {
+            document.write(m + " * " + i + " = " + m * i + "<br>");
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h3>구구단 만들기</h3>
+    <hr />
+    <script>
+      let n = prompt("몇 단을 원하세요??", "1~9단까지 가능합니다.");
+      gugudan(n);
+    </script>
+  </body>
+</html>
