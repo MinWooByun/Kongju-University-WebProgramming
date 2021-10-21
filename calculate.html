@@ -73,6 +73,38 @@
         <td onclick="calculate()">=</td>
       </tr>
     </table>
-    <script src="calculate.js"></script>
+    <script>
+      let calculateChecked = false;
+      function add(char) {
+        let display = document.querySelector(".display");
+        if (isNaN(char) == false) {
+          // 숫자인지 문자인지 먼저 확인
+          if (calculateChecked == true) {
+            // "="버튼을 누른 상태인지 확인
+            reset();
+            document.querySelector(".display").value = char;
+          } else {
+            display.value += char;
+            calculateChecked = false;
+          }
+        } else {
+          display.value += char;
+          calculateChecked = false;
+        }
+      }
+
+      function calculate() {
+        let display = document.querySelector(".display");
+        let result = eval(display.value);
+        document.querySelector(".result").value = result;
+        calculateChecked = true;
+      }
+
+      function reset() {
+        document.querySelector(".display").value = "";
+        document.querySelector(".result").value = "";
+        calculateChecked = false;
+      }
+    </script>
   </body>
 </html>

@@ -79,26 +79,33 @@
               class="login-form__idpw"
               type="email"
               placeholder="이메일을 입력해주세요."
+              required
             />
             <h1>비밀번호</h1>
             <input
               class="login-form__idpw"
               type="password"
               placeholder="비밀번호를 입력해주세요."
+              required
+              minlength="8"
             />
             <h1>이름</h1>
             <input
               class="login-form__idpw"
               type="text"
               placeholder="이름을 입력해주세요."
+              required
+              maxlength="7"
             />
             <h1>생년월일</h1>
-            <input class="login-form__idpw" type="date" />
+            <input class="login-form__idpw" type="date" required />
             <h1>전화번호</h1>
             <input
               class="login-form__idpw"
               type="tel"
+              pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
               placeholder="010-1234-5678"
+              required
             />
             <input class="login-form__submit" type="submit" value="회원가입" />
           </form>
