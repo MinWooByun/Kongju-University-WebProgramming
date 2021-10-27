@@ -113,4 +113,14 @@
       </section>
     </main>
   </body>
+  <script>
+    window.onload = function () {
+      let worker = new Worker("js/worker.js");
+
+      worker.postMessage("check");
+      worker.onmessage = function (event) {
+        alert(event.data);
+      };
+    };
+  </script>
 </html>

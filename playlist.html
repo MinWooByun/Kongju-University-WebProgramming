@@ -77,28 +77,58 @@
       const input = document.querySelector(".playlist__add input");
       const btnAdd = document.querySelector(".playlist__add button");
       const content = document.querySelector(".playlist__content");
-      let count = 1;
 
-      btnAdd.addEventListener("click", musicAdd);
+      let musicList = [];
 
-      function musicAdd() {
-        const newContent = document.createElement("p");
-        newContent.setAttribute("class", "newMusic");
-        newContent.setAttribute("id", `remove${count}`);
-        newContent.innerHTML =
-          "<span class='musicTitle'>" +
-          input.value +
-          "</span>" +
-          "<button class='btnRemove' onclick='musicRemove(" +
-          count +
-          ")'>삭제</button>";
-        content.appendChild(newContent);
-        count++;
+      const NEWMUSIC = "newMusic";
+
+      btnAdd.addEventListener("click", musicSubmit);
+
+      function saveMusic() {
+        localStorage.setItem(NEWMUSIC, JSON.stringify(musicList));
       }
 
-      function musicRemove(count) {
-        const removeMusic = document.getElementById(`remove${count}`);
-        content.removeChild(removeMusic);
+      function paintMusic(newMusicInfo) {
+        const newContent = document.createElement("p");
+        newContent.id = newMusicInfo.id;
+        newContent.innerHTML =
+          "<span class='musicTitle'>" +
+          newMusicInfo.text +
+          "</span>" +
+          "<button class='btnRemove' onclick='musicRemove()'>삭제</button>";
+        content.appendChild(newContent);
+        saveMusic();
+      }
+
+      function musicSubmit() {
+        const musicTitle = input.value;
+        input.value = "";
+        const musicInfo = {
+          id: Date.now(),
+          text: musicTitle,
+        };
+        musicList.push(musicInfo);
+        paintMusic(musicInfo);
+      }
+
+      function musicRemove() {
+        const readMusic = localStorage.getItem(NEWMUSIC);
+        const parseMusic = JSON.parse(readMusic);
+        const id = parseMusic[0].id.toString();
+        const pId = document.getElementById(`${id}`);
+        pId.remove();
+        musicList = musicList.filter(
+          (toMusic) => toMusic.id !== parseInt(pId.id)
+        );
+        saveMusic();
+      }
+
+      const savedMusicList = localStorage.getItem(NEWMUSIC);
+
+      if (savedMusicList != null) {
+        const parsedMusicList = JSON.parse(savedMusicList);
+        musicList = parsedMusicList;
+        parsedMusicList.forEach(paintMusic);
       }
     </script>
   </body>

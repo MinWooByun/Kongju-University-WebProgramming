@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Tab Page</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="weather">
+      <section class="weather-column">
+        <span></span>
+        <span></span>
+      </section>
+      <p></p>
+    </section>
+    <h2 class="clock">00:00:00</h2>
+    <form class="login-form hidden">
+      <input
+        type="text"
+        placeholder="What is your name?"
+        maxlength="10"
+        required
+      />
+    </form>
+    <h1 class="greeting hidden"></h1>
+
+    <!-- 날씨 js -->
+    <script>
+      const API_KEY = "f9064ebc5176a5a80b8a0136c5a122a5";
+
+      function onGeoOk(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+        fetch(url).then((respone) =>
+          respone.json().then((data) => {
+            const weatherIcon = document.querySelector(
+              ".weather-column span:nth-child(1)"
+            );
+            const weather = document.querySelector(
+              ".weather-column span:nth-child(2)"
+            );
+            const city = document.querySelector(".weather p");
+            const WEATHERSTAT = data.weather[0].main;
+            let weatherName = "";
+            if (WEATHERSTAT == "Clear") {
+              weatherName = '<i class="fas fa-sun"></i>';
+            } else if (WEATHERSTAT == "Clouds") {
+              weatherName = '<i class="fas fa-cloud"></i>';
+            } else if (WEATHERSTAT == "Rain") {
+              weatherName = '<i class="fas fa-cloud-rain"></i>';
+            } else if (WEATHERSTAT == "Thunderstorm") {
+              weatherName = '<i class="fas fa-bolt"></i>';
+            } else if (WEATHERSTAT == "Drizzle") {
+              weatherName = '<i class="fas fa-cloud-showers-heavy"></i>';
+            } else if (WEATHERSTAT == "Snow") {
+              weatherName = '<i class="far fa-snowflake"></i>';
+            } else if (
+              WEATHERSTAT == "Mist" ||
+              WEATHERSTAT == "Smoke" ||
+              WEATHERSTAT == "Haze" ||
+              WEATHERSTAT == "Dust" ||
+              WEATHERSTAT == "Fog" ||
+              WEATHERSTAT == "Sand" ||
+              WEATHERSTAT == "Ash" ||
+              WEATHERSTAT == "Squall" ||
+              WEATHERSTAT == "Tornado"
+            ) {
+              weatherName = '<i class="fas fa-smog"></i>';
+            }
+            weatherIcon.innerHTML = weatherName;
+            weather.innerText = `${Math.floor(data.main.temp).toString()}°`;
+            city.innerText = data.name;
+          })
+        );
+      }
+
+      function onGeoError() {
+        alert("위치 정보를 수락해주세요..😪😪");
+      }
+
+      navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+    </script>
+
+    <!-- 시계 js -->
+    <script>
+      const clock = document.querySelector(".clock");
+
+      function getClock() {
+        const date = new Date();
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const seconds = String(date.getSeconds()).padStart(2, "0");
+        clock.innerText = `${hours}:${minutes}:${seconds}`;
+      }
+      getClock();
+      setInterval(getClock, 1000);
+    </script>
+
+    <!-- 로그인 js -->
+    <script>
+      const loginForm = document.querySelector(".login-form");
+      const loginInput = document.querySelector(".login-form input");
+      const greeting = document.querySelector(".greeting");
+
+      const HIDDEN = "hidden";
+
+      function onLoginSubmit(event) {
+        event.preventDefault();
+        loginForm.classList.add(HIDDEN);
+        greeting.classList.remove(HIDDEN);
+        const userName = loginInput.value;
+        localStorage.setItem("userName", userName);
+        greeting.innerText = `Welcome~! ${userName}`;
+      }
+    </script>
+  </body>
+  <script
+    defer
+    src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+    crossorigin="anonymous"
+  ></script>
+</html>
