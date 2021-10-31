@@ -19,7 +19,9 @@
       </section>
       <p></p>
     </section>
+
     <h2 class="clock">00:00:00</h2>
+
     <form class="login-form hidden">
       <input
         type="text"
@@ -28,7 +30,46 @@
         required
       />
     </form>
+
     <h1 class="greeting hidden"></h1>
+
+    <form class="todo-form hidden">
+      <input
+        required
+        type="text"
+        placeholder="Please enter today's schedule."
+      />
+    </form>
+    <ul class="todo-list hidden"></ul>
+    <!-- todo.js -->
+    <script>
+      const toDoForm = document.querySelector(".todo-form");
+      const toDoInput = document.querySelector(".todo-form input");
+      const toDoList = document.querySelector(".todo-list");
+
+      let toDos = [];
+
+      const HIDDEN = "hidden";
+
+      function deleteToDo() {}
+
+      function paintToDo(newTodo) {}
+
+      function onToDoSubmit(event) {
+        event.preventDefault();
+        const newTodo = toDoInput.value;
+        toDoInput.value = "";
+        const newTodo = {
+          id: Date.now(),
+          text: newTodo,
+        };
+        toDos.push(newTodo);
+        toDoForm.classList.add(HIDDEN);
+        paintToDo(newTodo);
+      }
+
+      toDoForm.addEventListener("submit", onToDoSubmit);
+    </script>
 
     <!-- 날씨 js -->
     <script>
@@ -110,16 +151,33 @@
       const greeting = document.querySelector(".greeting");
 
       const HIDDEN = "hidden";
+      const USERNAME = "userName";
 
       function onLoginSubmit(event) {
         event.preventDefault();
         loginForm.classList.add(HIDDEN);
-        greeting.classList.remove(HIDDEN);
         const userName = loginInput.value;
-        localStorage.setItem("userName", userName);
-        greeting.innerText = `Welcome~! ${userName}`;
+        localStorage.setItem(USERNAME, userName);
+        paintUserName(userName);
+      }
+
+      function paintUserName(userName) {
+        greeting.classList.remove(HIDDEN);
+        greeting.innerText = `welcome~! ${userName}`;
+      }
+
+      const loadUserName = localStorage.getItem(USERNAME);
+
+      if (loadUserName == null) {
+        loginForm.classList.remove(HIDDEN);
+        loginForm.addEventListener("submit", onLoginSubmit);
+      } else {
+        paintUserName(loadUserName);
       }
     </script>
+
+    <!-- todo.js -->
+    <script></script>
   </body>
   <script
     defer
