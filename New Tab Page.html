@@ -4,12 +4,151 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Tab Page</title>
     <style>
+      @import "css/reset.css";
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+      input {
+        text-align: center;
+      }
+      form input {
+        border: none;
+        width: 500px;
+        height: 80px;
+        border-bottom: 2px solid white;
+        padding: 0px 10px;
+        outline: none;
+        background: none;
+        color: white;
+        font-size: 35px;
+        font-weight: 600;
+      }
+      input::placeholder {
+        color: white;
+        text-align: center;
+      }
+      ul {
+        margin-top: 50px;
+      }
+      li {
+        animation: fadeInOut 1.5s ease-in-out;
+      }
+      li h3 {
+        font-size: 35px;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 10px;
+      }
+      li section {
+        display: flex;
+        align-items: center;
+      }
+      li span {
+        font-size: 50px;
+        font-weight: 600;
+        color: white;
+        margin-right: 20px;
+      }
+      li button {
+        font-size: 40px;
+        background: none;
+        border: none;
+        color: white;
+        padding-top: 5px;
+        transition: font-size 0.5s;
+      }
+      li button:hover {
+        font-size: 50px;
+      }
+      #greeting {
+        font-size: 50px;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 50px;
+        animation: fadeInOut 1.5s ease-in-out;
+      }
       .hidden {
         display: none;
       }
+      .weather {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 15px;
+        margin-right: 15px;
+        color: white;
+        font-weight: 600;
+      }
+      .weather-column {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+      }
+      .weather-column span:nth-child(1) {
+        font-size: 20px;
+        margin-right: 10px;
+        padding-bottom: 10px;
+      }
+      .weather-column span:nth-child(2) {
+        font-size: 35px;
+      }
+      .clock {
+        color: white;
+        font-size: 140px;
+        font-weight: 600;
+        margin-top: 250px;
+        margin-bottom: 20px;
+        animation: fadeInOut 1.5s ease-in-out;
+      }
+      .login-form {
+        animation: fadeInOut 1.5s ease-in-out;
+      }
+      .todo-form {
+        margin-top: 80px;
+        animation: fadeInOut 1.5s ease-in-out;
+      }
+      .quote {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        animation: fadeInOut 1.5s ease-in-out;
+      }
+      .quote span:last-child {
+        margin-top: 5px;
+      }
+      @keyframes fadeInOut {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
+    <title>New Tab Page</title>
   </head>
   <body>
     <section class="weather">
@@ -19,66 +158,54 @@
       </section>
       <p></p>
     </section>
-
     <h2 class="clock">00:00:00</h2>
-
     <form class="login-form hidden">
       <input
+        required
+        maxlength="15"
         type="text"
         placeholder="What is your name?"
-        maxlength="10"
-        required
       />
     </form>
-
-    <h1 class="greeting hidden"></h1>
-
-    <form class="todo-form hidden">
+    <h1 id="greeting" class="hidden"></h1>
+    <form class="todo-form">
       <input
-        required
         type="text"
+        required
         placeholder="Please enter today's schedule."
       />
     </form>
-    <ul class="todo-list hidden"></ul>
-    <!-- todo.js -->
+    <ul class="todo-list"></ul>
+    <section class="quote">
+      <span></span>
+      <span></span>
+    </section>
+
+    <!-- 배경화면.js -->
     <script>
-      const toDoForm = document.querySelector(".todo-form");
-      const toDoInput = document.querySelector(".todo-form input");
-      const toDoList = document.querySelector(".todo-list");
-
-      let toDos = [];
-
-      const HIDDEN = "hidden";
-
-      function deleteToDo() {}
-
-      function paintToDo(newTodo) {}
-
-      function onToDoSubmit(event) {
-        event.preventDefault();
-        const newTodo = toDoInput.value;
-        toDoInput.value = "";
-        const newTodo = {
-          id: Date.now(),
-          text: newTodo,
-        };
-        toDos.push(newTodo);
-        toDoForm.classList.add(HIDDEN);
-        paintToDo(newTodo);
-      }
-
-      toDoForm.addEventListener("submit", onToDoSubmit);
+      const images = ["0.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
+      // Math.floor 함수를 이용하여 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환시킨다.
+      // 이것을 images 배열의 길이 만큼 Math.random()에 곱하면 배열의 길이 만큼의 숫자중에 하나의
+      // 숫자를 받을 수 있다.
+      const choseImage = images[Math.floor(Math.random() * images.length)];
+      const bgImage = document.createElement("img");
+      bgImage.src = `img/${choseImage}`;
+      document.body.appendChild(bgImage);
     </script>
 
-    <!-- 날씨 js -->
+    <!-- 날씨.js -->
     <script>
+      // 날씨 사이트의 개인 api-key 값이다.
       const API_KEY = "f9064ebc5176a5a80b8a0136c5a122a5";
 
       function onGeoOk(position) {
+        // 위치정보를 수락 했을 때 실행하는 함수이다.
+        // lat, lon 위도와 경도 위치값이다.
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        // 날씨 사이트에 위도 경도 위치값을 넘겨 api를 이용하여 현재 위치의 날씨 정보를 가져온다.
         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+        // url을 즉, 날씨 정보를 토대로 html에 어떻게 표시해 줄 것이지 결정하는 구문이다.
         fetch(url).then((respone) =>
           respone.json().then((data) => {
             const weatherIcon = document.querySelector(
@@ -88,8 +215,10 @@
               ".weather-column span:nth-child(2)"
             );
             const city = document.querySelector(".weather p");
+            // 날씨 상태를 문자열로 가져온다.
             const WEATHERSTAT = data.weather[0].main;
             let weatherName = "";
+            // 날씨에 따라 아이콘을 설정해주는 구문이다.
             if (WEATHERSTAT == "Clear") {
               weatherName = '<i class="fas fa-sun"></i>';
             } else if (WEATHERSTAT == "Clouds") {
@@ -123,66 +252,247 @@
       }
 
       function onGeoError() {
-        alert("위치 정보를 수락해주세요..😪😪");
+        alert(
+          "위치 정보를 수락해주세요. 수락하지 않으면 날씨를 불러올 수 없어요..😪😪"
+        );
       }
 
+      // navigator.geolocation.getCurrentPosition() 함수는 wifi, 위치, gps 등의 정보를 가져올 수 있게 해주는 함수이다.
       navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
     </script>
 
-    <!-- 시계 js -->
+    <!-- 시계.js -->
     <script>
       const clock = document.querySelector(".clock");
 
       function getClock() {
         const date = new Date();
+        // padStart는 현재 문자열의 시작을 다른 문자열로 채워, 주어진 길이를 만족하는 새로운 문자열을 반환합니다.
+        // 아래의 경우에는 2개의 문자열로 채워지지 않으면 나머지는 0으로 채워줍니다.
         const hours = String(date.getHours()).padStart(2, "0");
         const minutes = String(date.getMinutes()).padStart(2, "0");
         const seconds = String(date.getSeconds()).padStart(2, "0");
         clock.innerText = `${hours}:${minutes}:${seconds}`;
       }
+
       getClock();
+      // setInterval를 주어 1초 마다 계속해서 시간을 갱신하도록 하였습니다.
       setInterval(getClock, 1000);
     </script>
 
-    <!-- 로그인 js -->
+    <!-- 유저등록.js -->
     <script>
       const loginForm = document.querySelector(".login-form");
       const loginInput = document.querySelector(".login-form input");
-      const greeting = document.querySelector(".greeting");
+      const greeting = document.querySelector("#greeting");
 
-      const HIDDEN = "hidden";
-      const USERNAME = "userName";
+      const HIDDEN_CLASSNAME = "hidden";
+      const USERNAME_KEY = "userName";
 
       function onLoginSubmit(event) {
+        // preventDefault를 이용하여 페이지가 자동으로 새로고침
+        // 하는것을 제거하였습니다.
         event.preventDefault();
-        loginForm.classList.add(HIDDEN);
+        // 유저를 등록했다면 form을 없애야 하기 때문에 hidden 클래스를
+        // loginForm에 추가시켜줍니다.
+        loginForm.classList.add(HIDDEN_CLASSNAME);
         const userName = loginInput.value;
-        localStorage.setItem(USERNAME, userName);
-        paintUserName(userName);
+        // 로컬스토리지에 유저이름을 추가해줍니다.
+        localStorage.setItem(USERNAME_KEY, userName);
+        paintGreeting(userName);
       }
 
-      function paintUserName(userName) {
-        greeting.classList.remove(HIDDEN);
-        greeting.innerText = `welcome~! ${userName}`;
+      function paintGreeting(userName) {
+        // h1 태그의 hidden 클래스를 삭제시켜주고 유저이름을 화면에 표시합니다.
+        greeting.classList.remove(HIDDEN_CLASSNAME);
+        greeting.innerText = `Welcome~! ${userName}`;
       }
 
-      const loadUserName = localStorage.getItem(USERNAME);
+      // 페이지가 로드될 때 마다 로컬스토리지에서 유저이름을 가져옵니다.
+      const savedUserName = localStorage.getItem(USERNAME_KEY);
 
-      if (loadUserName == null) {
-        loginForm.classList.remove(HIDDEN);
+      // 유저이름이 없다면 loginForm의 hidden 클래스를 삭제하여 form이 화면에
+      // 나타나도록 합니다. 그리고 loginForm에 submit 타입을 이벤트를 추가시켜줍니다.
+      // 유저 이름이 존재하다면 paintGreeting 함수로 이동하여 h1 태그에 유저이름을 화면에
+      // 표시해줍니다.
+      if (savedUserName == null) {
+        loginForm.classList.remove(HIDDEN_CLASSNAME);
         loginForm.addEventListener("submit", onLoginSubmit);
       } else {
-        paintUserName(loadUserName);
+        paintGreeting(savedUserName);
       }
     </script>
 
-    <!-- todo.js -->
-    <script></script>
+    <!-- 일정.js -->
+    <script>
+      const toDoForm = document.querySelector(".todo-form");
+      const toDoInput = toDoForm.querySelector("input");
+      const toDoList = document.querySelector(".todo-list");
+
+      const TODOS_KEY = "todos";
+      const HIDDEN = "hidden";
+      const UNHIDDEN = "unHideen";
+      const FORMHIDDEN = "formHidden";
+
+      let toDos = [];
+
+      function saveToDos() {
+        // 로컬스토리지에 todos 이름으로 toDos 배열을 문자열로 저장합니다.
+        localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
+      }
+
+      function deleteTodo(event) {
+        //const li = event.target.parentElement;
+        // 로컬스토리지에서 todos라는 이름으로 되어있는 배열을 가져옵니다.
+        const readToDos = localStorage.getItem(TODOS_KEY);
+        // 이 todos 배열은 문자열로 되어 있기 때문에 parse를 이용하여 배열을
+        // 주소 형태로 변경합니다.
+        const parseToDos = JSON.parse(readToDos);
+        const id = parseToDos[0].id.toString();
+        const liId = document.getElementById(`${id}`);
+        liId.remove();
+        // filter를 이용하여 toDo의 id와 같지 않은 값은 새로운 배열로 만들어
+        // 반환해줍니다.
+        toDos = toDos.filter((toDo) => toDo.id !== parseInt(liId.id));
+        toDoForm.classList.remove(HIDDEN);
+        localStorage.setItem(FORMHIDDEN, UNHIDDEN);
+        saveToDos();
+      }
+
+      function paintTodo(newTodo) {
+        const li = document.createElement("li");
+        li.id = newTodo.id;
+        const h3 = document.createElement("h3");
+        h3.innerText = "TODAY";
+        const section = document.createElement("section");
+        const span = document.createElement("span");
+        span.innerText = newTodo.text;
+        const button = document.createElement("button");
+        // 버튼에 아이콘을 넣어주기 위한 구문입니다.
+        button.innerHTML = '<i class="fas fa-trash-alt"></i>';
+        button.addEventListener("click", deleteTodo);
+        li.appendChild(h3);
+        li.appendChild(section);
+        section.appendChild(span);
+        section.appendChild(button);
+        toDoList.appendChild(li);
+        saveToDos();
+      }
+
+      function handleToDoSubmit(event) {
+        // preventDefault를 이용하여 페이지가 새로고침을 하지 않도록 해줍니다.
+        event.preventDefault();
+        const newTodo = toDoInput.value;
+        toDoInput.value = "";
+        // todo를 오브젝트 형태로 설정해줍니다.
+        const newTodoObj = {
+          id: Date.now(),
+          text: newTodo,
+        };
+        // newTodoObj 오브젝트를 toDos 배열에 넣어줍니다.
+        toDos.push(newTodoObj);
+        toDoForm.classList.add(HIDDEN);
+        localStorage.setItem(FORMHIDDEN, HIDDEN);
+        paintTodo(newTodoObj);
+      }
+
+      // toDoForm에 submit 타입의 이벤트를 추가해줍니다.
+      toDoForm.addEventListener("submit", handleToDoSubmit);
+
+      // 페이지가 로드될 때 마다 로컬스토리지에서 FORMHIDDEN 값을 가져옵니다.
+      const formHidden = localStorage.getItem(FORMHIDDEN);
+
+      // formHidden이 null이거나 UNHIDDEN이면 toDoForm의 hidden 클래스를 삭제합니다.
+      // 그렇지 않다면 toDoForm의 hidden 클래스를 추가하여 화면에서 안 나타나도록 합니다.
+      if (formHidden == null || formHidden == UNHIDDEN) {
+        toDoForm.classList.remove(HIDDEN);
+      } else {
+        toDoForm.classList.add(HIDDEN);
+      }
+
+      // 페이지가 로드될 때 마다 로컬스토리지에서 todos 값의 배열을 가져옵니다.
+      const savedToDos = localStorage.getItem(TODOS_KEY);
+
+      // todos 값의 배열의 존재하다면 parse를 이용하여 배열을 주소 형태로 변경합니다.
+      // 변경한 배열을 toDos에 넣어주고 forEach를 이용하여 배열안에 있는 item들을 각각
+      // 한 번씩 실행하고 paintTodo 함수를 실행하여 화면에 그려줍니다.
+      if (savedToDos != null) {
+        const parsedToDos = JSON.parse(savedToDos);
+        toDos = parsedToDos;
+        // forEach() 함수는 배열안에 있는 item들을 각각 한 번씩 실행해준다.
+        parsedToDos.forEach(paintTodo);
+      }
+    </script>
+
+    <!-- 명언.js -->
+    <script>
+      // 배열안에 명언과 작가를 넣어줍니다.
+      const quotes = [
+        {
+          quotes: "난 지옥같은 상황에서도 기회를 만들어낸다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "당신이 정말 인생을 사랑한다면 시간을 낭비하지 마라. 인생은 시간으로 이뤄져 있으니까.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "아는 것만으로는 충분하지 않다. 적용할 줄 알아야만 한다. 의지만 갖추고는 충분하지 않다. 행동으로 옮겨야만 한다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes: "진정한 삶은 무언가를 위해 사는 것이다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes: "불멸로 가는 삶은 가치 있는 삶을 사는 것이다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "실패를 두려워하지 마라. 실패가 아니라 낮은 목표치가 죄라 하겠다. 위대한 시도에서는 실패조차 영광스러울 따름이다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes: "실수는 인정할 수 있는 용기만 있다면 항상 용서될 수 있다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "무지한 사람은 아무리 어둠 속을 헤매도 평생 빛은 찾을 수 없다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "한 번 패배했다고 자포자기하지 마라. 당신 자신의 마음속에서 패배를 현실로 받아들이기 전까지는 진정한 패배가 아니다.",
+          author: "Bruce Lee",
+        },
+        {
+          quotes:
+            "질 것 같다고 생각하는 자는 그렇게 될 수밖에 없다. 감히 시도하지 않는 자는 아무것도 할 수 없다. 이기고는 싶으나 이길 수 있을까 회의하는 자는 절대 이길 수 없다.",
+          author: "Bruce Lee",
+        },
+      ];
+
+      const quote = document.querySelector(".quote span:first-child");
+      const author = document.querySelector(".quote span:last-child");
+
+      // Math.floor 함수를 이용하여 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환시킨다.
+      // 이것을 quotes 배열의 길이 만큼 Math.random()에 곱하면 배열의 길이 만큼의 숫자중에 하나의
+      // 숫자를 받을 수 있다.
+      const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+      quote.innerText = todaysQuote.quotes;
+      author.innerText = todaysQuote.author;
+    </script>
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script
-    defer
-    src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
-    crossorigin="anonymous"
-  ></script>
 </html>

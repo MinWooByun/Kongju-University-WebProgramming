@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Worker example: One-core computation</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
   </head>
   <body>
-    <p>
-      The highest prime number discovered so far is:
-      <span id="result"></span>
-    </p>
-    <script>
-      var worker = new Worker("js/worker.js");
-      worker.onmessage = function (event) {
-        document.getElementById("result").textContent = event.data;
-      };
-    </script>
+    <input type="submit" value="보내기" />
   </body>
 </html>
