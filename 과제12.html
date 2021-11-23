@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과제12</title>
+    <style>
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      span,
+      .gcdTitle {
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .date {
+        color: tomato;
+      }
+      .calculate {
+        width: 100%;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .clear {
+        width: 273.86px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>GCD 프로그램</h1>
+      <br />
+      <form method="get">
+        <span>Num1 : </span>
+        <input class="number1" type="text" name="num1" />
+        <p></p>
+        <span>Num2 : </span>
+        <input class="number2" type="text" name="num2" />
+        <p>
+          <input
+            type="button"
+            value="계산"
+            class="calculate"
+            onclick="getGcdNumber()"
+          />
+        </p>
+      </form>
+      <p>
+        <button class="clear">초기화(지우기)</button>
+      </p>
+      <br />
+      <p class="gcdTitle">GCD</p>
+      <span class="gcd"></span>
+    </main>
+    <script>
+      let xmlhttp = false;
+      if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+      }
+
+      function getGcdNumber() {
+        const number1 = document.querySelector(".number1").value;
+        const number2 = document.querySelector(".number2").value;
+        const url = "과제12.jsp?number1=" + number1 + "&number2=" + number2;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = getGCD;
+        xmlhttp.send(null);
+      }
+
+      function getGCD() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.querySelector(".gcd").innerHTML = xmlhttp.responseText;
+        } else {
+          document.querySelector(".gcd").innerText = "Error!!";
+        }
+      }
+
+      const clearButton = document.querySelector(".clear");
+      clearButton.addEventListener("click", clear);
+
+      function clear() {
+        const input1 = document.querySelector(".number1");
+        const input2 = document.querySelector(".number2");
+        const gcd = document.querySelector(".gcd");
+        input1.value = "";
+        input2.value = "";
+        gcd.innerText = "";
+      }
+    </script>
+  </body>
+</html>
