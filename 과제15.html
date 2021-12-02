@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과제15</title>
+  </head>
+  <body>
+    <main>
+      <h1>증명서 발급시스템</h1>
+      <form action="과제15_2.jsp" method="get">
+        <p>id : <input type="text" class="id" name="id" /></p>
+        <p>pass : <input type="password" class="pass" name="pass" /></p>
+        <span>증명서 : </span>
+        <select name="certification" onclick="getStudent()">
+          <option value="재학증명서">재학증명서</option>
+          <option value="성적증명서">성적증명서</option>
+          <option value="졸업증명서">졸업증명서</option>
+        </select>
+        <p>주소 : <input type="text" class="address" name="address" /></p>
+        <p><input type="submit" value="확인" /></p>
+      </form>
+    </main>
+    <script>
+      let xmlhttp = false;
+      if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+      }
+
+      function getStudent() {
+        const id = document.querySelector(".id").value;
+        const pass = document.querySelector(".pass").value;
+        const url = "과제15_1.jsp?id=" + id + "&pass=" + pass;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = getinfo;
+        xmlhttp.send(null);
+      }
+
+      function getinfo() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          document.querySelector(".address").value = xmlhttp.responseText;
+        } else {
+          document.querySelector(".address").value = "Error!!";
+        }
+      }
+    </script>
+  </body>
+</html>
